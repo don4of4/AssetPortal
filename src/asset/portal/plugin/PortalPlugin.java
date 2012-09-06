@@ -1,4 +1,4 @@
-package asset.portal.bukkit;
+package asset.portal.plugin;
 
 import java.io.File;
 
@@ -13,6 +13,7 @@ import asset.connect.api.result.StatusCode;
 import asset.connect.api.result.impl.DirectResult;
 import asset.portal.IConnector;
 import asset.portal.IRedirector;
+import asset.portal.command.PortalCommandExecutor;
 import asset.portal.gate.Gate;
 import asset.portal.gate.GateListener;
 import asset.portal.gate.GateRegistry;
@@ -50,6 +51,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			this.storage.loadUsers();
 			this.storage.setGateRegistry(this.gateRegistry);
 			this.storage.loadGates();
+			this.getServer().getPluginCommand("portal").setExecutor(new PortalCommandExecutor());
 			this.getServer().getScheduler().scheduleSyncRepeatingTask(this, this.storage, 100L, 100L);
 			this.getServer().getPluginManager().registerEvents(this.gateListener, this);
 			this.getServer().getPluginManager().registerEvents(this.userListener, this);

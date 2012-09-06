@@ -5,5 +5,5 @@ description: Portals using the Connect API
 author: AssetGateway
 website: http://assetgateway.com/
 
-main: asset.portal.bukkit.PortalPlugin
+main: asset.portal.plugin.PortalPlugin
 softdepend: [AssetConnect]

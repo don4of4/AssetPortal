@@ -13,6 +13,10 @@ public class MessageConstants {
 		PREFIX + "&2You will be redirected when it becomes available."
 	};
 	
+	public static final String COMMAND_NO_SYNTAX = PREFIX + "&cYou do not have the required syntax &f(&4%s&f)";
+	public static final String COMMAND_NO_PERMISSION = PREFIX + "&cYou do not have the required permissions &f(&4%s&f)";
+	public static final String COMMAND_NO = PREFIX + "&cThe specified command does not exist &f(&4%s&f)";
+	
 	public static final String[] format(String[] messages, Object... args) {
 		return ChatColor.translateAlternateColorCodes('&', StringUtils.concat(messages, "\n")).split("\n");
 	}

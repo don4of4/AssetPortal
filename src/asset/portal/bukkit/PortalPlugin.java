@@ -16,8 +16,8 @@ import asset.portal.IRedirector;
 import asset.portal.gate.Gate;
 import asset.portal.gate.GateListener;
 import asset.portal.gate.GateRegistry;
-import asset.portal.store.Store;
-import asset.portal.store.impl.FileStore;
+import asset.portal.storage.Storage;
+import asset.portal.storage.impl.FileStorage;
 import asset.portal.user.UserListener;
 import asset.portal.user.UserRedirectorTask;
 import asset.portal.user.UserRegistry;
@@ -29,7 +29,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 	private GateListener gateListener;
 	private UserRegistry userRegistry;
 	private UserListener userListener;
-	private Store store;
+	private Storage storage;
 
 	@Override
 	public void onLoad() {
@@ -45,12 +45,12 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			this.gateListener = new GateListener(this.gateRegistry, this);
 			this.userRegistry = new UserRegistry();
 			this.userListener = new UserListener(this.gateRegistry, this.userRegistry, this, this);
-			this.store = new FileStore(new File(this.getDataFolder(), "store_user.dat"), new File(this.getDataFolder(), "store_gate.dat"));
-			this.store.setUserRegistry(this.userRegistry);
-			this.store.loadUsers();
-			this.store.setGateRegistry(this.gateRegistry);
-			this.store.loadGates();
-			this.getServer().getScheduler().scheduleSyncRepeatingTask(this, this.store, 100L, 100L);
+			this.storage = new FileStorage(new File(this.getDataFolder(), "store_user.dat"), new File(this.getDataFolder(), "store_gate.dat"));
+			this.storage.setUserRegistry(this.userRegistry);
+			this.storage.loadUsers();
+			this.storage.setGateRegistry(this.gateRegistry);
+			this.storage.loadGates();
+			this.getServer().getScheduler().scheduleSyncRepeatingTask(this, this.storage, 100L, 100L);
 			this.getServer().getPluginManager().registerEvents(this.gateListener, this);
 			this.getServer().getPluginManager().registerEvents(this.userListener, this);
 			this.getConnect().registerDirectEventListener(this.userListener);
@@ -62,8 +62,8 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 	@Override
 	public void onDisable() {
 		try {
-			if(this.store != null) {
-				this.store.saveAll();
+			if(this.storage != null) {
+				this.storage.saveAll();
 			}
 			if(this.gateRegistry != null) {
 				this.gateRegistry.clear();
@@ -78,7 +78,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			this.gateListener = null;
 			this.userRegistry = null;
 			this.userListener = null;
-			this.store = null;
+			this.storage = null;
 		}
 	}
 

@@ -1,0 +1,9 @@
+name: AssetPortal
+version: 3
+description: Portals using the Connect API
+
+author: AssetGateway
+website: http://assetgateway.com/
+
+main: asset.portal.bukkit.PortalPlugin
+softdepend: [AssetConnect]

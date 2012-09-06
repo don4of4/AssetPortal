@@ -7,3 +7,8 @@ website: http://assetgateway.com/
 
 main: asset.portal.plugin.PortalPlugin
 softdepend: [AssetConnect]
+
+commands:
+  portal:
+    description:
+    usage:

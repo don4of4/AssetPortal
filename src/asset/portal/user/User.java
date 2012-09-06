@@ -40,7 +40,7 @@ public class User {
 	}
 	
 	public static String toString(User user) {
-		return user.getName() + ":" + user.getServer();
+		return user.name + ":" + user.server;
 	}
 	
 	@Override

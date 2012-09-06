@@ -37,7 +37,7 @@ public class FileStore extends Store {
 			List<Gate> result = new ArrayList<Gate>();
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
-				result.add(Gate.fromString(line));
+				result.add(Gate.fromString(line.trim()));
 			}
 			gateRegistry.addAll(result);
 		} catch(Exception exception) {
@@ -94,7 +94,7 @@ public class FileStore extends Store {
 			List<User> result = new ArrayList<User>();
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
-				result.add(User.fromString(line));
+				result.add(User.fromString(line.trim()));
 			}
 			userRegistry.addAll(result);
 		} catch(Exception exception) {

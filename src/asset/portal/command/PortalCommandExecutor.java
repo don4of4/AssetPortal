@@ -8,7 +8,7 @@ import asset.portal.gate.GateRegistry;
 public class PortalCommandExecutor extends CommandRegistryExecutor {
 
 	public PortalCommandExecutor(GateRegistry gateRegistry) {
-		this.submit(new CreateCommand());
+		this.submit(new CreateCommand(gateRegistry));
 		this.submit(new DeleteCommand(gateRegistry));
 		this.submit(new ListCommand(gateRegistry));
 	}

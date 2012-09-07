@@ -61,6 +61,10 @@ public class GateRegistry {
 	public Collection<Gate> getAll() {
 		return this.gates.values();
 	}
+	
+	public boolean hasByDestinationServer(String destinationServer) {
+		return this.gates.containsKey(destinationServer);
+	}
 
 	public void clear() {
 		this.gates.clear();

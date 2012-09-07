@@ -17,6 +17,8 @@ public class MessageConstants {
 	public static final String COMMAND_NO_PERMISSION = PREFIX + "&cYou do not have the required permissions &f(&4%s&f)";
 	public static final String COMMAND_NO = PREFIX + "&cThe specified command does not exist &f(&4%s&f)";
 	
+	public static final String CREATE_ALREADY_EXISTS =  PREFIX + "&cThere is already a gate leading to the specified server &f(&4%s&f)";
+	
 	public static final String DELETE_NO_EXIST = PREFIX + "&cThere is no gate leading to the specified server &f(&4%s&f)";
 	public static final String DELETE_SUCCESS = PREFIX + "The gate leading to &6%s &fhas been deleted";
 	

@@ -23,15 +23,16 @@ public class DeleteCommand implements Command {
 			throw new CommandPermissionException(PermissionConstants.PORTAL_DELETE);
 		}
 		if(args.length < 1) {
-			throw new CommandSyntaxException("server");
+			throw new CommandSyntaxException("destinationServer");
 		}
-		Gate gate = this.gateRegistry.getByDestinationServer(args[0]);
+		String detinationServer = args[0];
+		Gate gate = this.gateRegistry.getByDestinationServer(detinationServer);
 		if(gate == null) {
-			player.sendMessage(MessageConstants.format(MessageConstants.DELETE_NO_EXIST, args[0]));
+			player.sendMessage(MessageConstants.format(MessageConstants.DELETE_NO_EXIST, detinationServer));
 			return;
 		}
 		this.gateRegistry.unregister(gate);
-		player.sendMessage(MessageConstants.format(MessageConstants.DELETE_SUCCESS, args[0]));
+		player.sendMessage(MessageConstants.format(MessageConstants.DELETE_SUCCESS, detinationServer));
 	}
 
 	public String getId() {

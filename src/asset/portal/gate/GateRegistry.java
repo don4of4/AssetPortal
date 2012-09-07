@@ -27,7 +27,7 @@ public class GateRegistry {
 	public void unregister(Gate gate) {
 		this.gatesLock.lock();
 		try {
-			this.gates.remove(gate);
+			this.gates.remove(gate.getDestinationServer());
 		} finally {
 			this.gatesLock.unlock();
 		}

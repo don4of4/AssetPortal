@@ -2,6 +2,7 @@ package asset.portal.user;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -30,7 +31,8 @@ public class UserListener implements Listener, DirectEventListener {
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent playerJoinEvent) {
-		User user = this.getUser(playerJoinEvent.getPlayer().getName());
+		Player player = playerJoinEvent.getPlayer();
+		User user = this.getUser(player.getName());
 		String fromServer = user.getFromServer();
 		if(fromServer == null) {
 			if(user.getServer().equals(this.connector.getConnect().getConnectSettings().getUsername())) {
@@ -39,20 +41,22 @@ public class UserListener implements Listener, DirectEventListener {
 			this.redirector.redirectLastServer(user.getName(), user.getServer());
 			return;
 		}
+		this.redirector.respondRedirect(player, fromServer);
 		user.setServer(this.connector.getConnect().getConnectSettings().getUsername());
+		user.setFromServer(null);
 		Gate gate = this.gateRegistry.getByDestinationServer(fromServer);
 		if(gate == null) {
 			return;
 		}
-		playerJoinEvent.getPlayer().teleport(new Location(Bukkit.getServer().getWorld(gate.getOutwardWorld()), gate.getOutwardX(), gate.getOutwardY(), gate.getOutwardZ(), gate.getOutwardYaw(), 0));
+		player.teleport(new Location(Bukkit.getServer().getWorld(gate.getOutwardWorld()), gate.getOutwardX(), gate.getOutwardY(), gate.getOutwardZ(), gate.getOutwardYaw(), 0));
 	}
 
 	public void onDirect(Connect connect, DirectEvent directEvent) {
-		String[] message = directEvent.getMessage().split(" ");
+		String[] message = directEvent.getMessage().trim().split(" ");
 		if(message.length != 3) {
 			return;
 		}
-		if(message[0].equals("PORTAL")) {
+		if(!message[0].equals("PORTAL")) {
 			return;
 		}
 		if(message[1].equals("REQUEST")) {

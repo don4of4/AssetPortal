@@ -49,7 +49,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			this.userRegistry = new UserRegistry();
 			this.userListener = new UserListener(this.gateRegistry, this.userRegistry, this, this);
 			this.createListener = new CreateListener(this.gateRegistry);
-			this.storage = new FileStorage(new File(this.getDataFolder(), "store_user.dat"), new File(this.getDataFolder(), "store_gate.dat"));
+			this.storage = new FileStorage(new File(this.getDataFolder(), "store_gate.dat"), new File(this.getDataFolder(), "store_user.dat"));
 			this.storage.setUserRegistry(this.userRegistry);
 			this.storage.loadUsers();
 			this.storage.setGateRegistry(this.gateRegistry);
@@ -134,7 +134,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			return;
 		}
 		UserRedirectorTask userRedirector = new UserRedirectorTask(username, server, this);
-		userRedirector.setTaskId(this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, userRedirector, 100L, 100L));
+		userRedirector.setTaskId(this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, userRedirector, 20L, 100L));
 	}
 	
 	public Connect getConnect() {

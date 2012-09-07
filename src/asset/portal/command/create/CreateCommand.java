@@ -16,6 +16,7 @@ public class CreateCommand implements Command {
 	
 	public CreateCommand(GateRegistry gateRegistry, CreateListener createListener) {
 		this.gateRegistry = gateRegistry;
+		this.createListener = createListener;
 	}
 	
 	public void execute(Player player, String[] args) throws CommandPermissionException, CommandSyntaxException {

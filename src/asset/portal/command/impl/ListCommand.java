@@ -24,7 +24,7 @@ public class ListCommand implements Command {
 			throw new CommandPermissionException(PermissionConstants.PORTAL_LIST);
 		}
 		String[] gates = new String[this.gateRegistry.getAll().size()];
-		int i = -1;
+		int i = 0;
 		for(Gate gate : this.gateRegistry.getAll()) {
 			gates[i++] = gate.getDestinationServer();
 		}

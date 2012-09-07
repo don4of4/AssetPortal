@@ -39,13 +39,13 @@ public class Gate {
 		int y = location.getBlockY();
 		int z = location.getBlockZ();
 		String world = location.getWorld().getName();
-		if(x < this.inwardMinX && x > this.inwardMaxX) {
+		if(x < this.inwardMinX || x > this.inwardMaxX) {
 			return false;
 		}
-		if(y < this.inwardMinY && y > inwardMaxY) {
+		if(y < this.inwardMinY || y > inwardMaxY) {
 			return false;
 		}
-		if(z < this.inwardMinZ && z > this.inwardMaxZ) {
+		if(z < this.inwardMinZ || z > this.inwardMaxZ) {
 			return false;
 		}
 		if(!this.inwardWorld.equals(world)) {

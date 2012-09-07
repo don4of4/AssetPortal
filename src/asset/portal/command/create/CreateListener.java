@@ -3,6 +3,7 @@ package asset.portal.command.create;
 import java.util.Map;
 
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -49,7 +50,7 @@ public class CreateListener implements Listener {
 			player.sendMessage(MessageConstants.format(MessageConstants.CREATE_STEP_3));
 			break;
 		case OUTWARD:
-			createSession.setOutward(block);
+			createSession.setOutward(block.getRelative(BlockFace.UP));
 			createSession.setOutwardYaw((int) player.getLocation().getYaw());
 			this.gateRegistry.register(createSession.createGate());
 			this.createSessions.remove(createSession);

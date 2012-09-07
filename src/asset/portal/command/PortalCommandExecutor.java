@@ -3,13 +3,14 @@ package asset.portal.command;
 import asset.portal.command.impl.CreateCommand;
 import asset.portal.command.impl.DeleteCommand;
 import asset.portal.command.impl.ListCommand;
+import asset.portal.gate.GateRegistry;
 
 public class PortalCommandExecutor extends CommandRegistryExecutor {
 
-	public PortalCommandExecutor() {
+	public PortalCommandExecutor(GateRegistry gateRegistry) {
 		this.submit(new CreateCommand());
-		this.submit(new DeleteCommand());
-		this.submit(new ListCommand());
+		this.submit(new DeleteCommand(gateRegistry));
+		this.submit(new ListCommand(gateRegistry));
 	}
 	
 	public String getId() {

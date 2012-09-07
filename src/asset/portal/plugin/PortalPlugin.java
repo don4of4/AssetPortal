@@ -51,7 +51,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			this.storage.loadUsers();
 			this.storage.setGateRegistry(this.gateRegistry);
 			this.storage.loadGates();
-			this.getServer().getPluginCommand("portal").setExecutor(new PortalCommandExecutor());
+			this.getServer().getPluginCommand("portal").setExecutor(new PortalCommandExecutor(this.gateRegistry));
 			this.getServer().getScheduler().scheduleSyncRepeatingTask(this, this.storage, 100L, 100L);
 			this.getServer().getPluginManager().registerEvents(this.gateListener, this);
 			this.getServer().getPluginManager().registerEvents(this.userListener, this);

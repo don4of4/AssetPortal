@@ -1,4 +1,4 @@
-package asset.portal.command.impl;
+package asset.portal.command.create;
 
 import org.bukkit.entity.Player;
 
@@ -12,8 +12,9 @@ import asset.portal.util.PermissionConstants;
 public class CreateCommand implements Command {
 
 	private GateRegistry gateRegistry;
+	private CreateListener createListener;
 	
-	public CreateCommand(GateRegistry gateRegistry) {
+	public CreateCommand(GateRegistry gateRegistry, CreateListener createListener) {
 		this.gateRegistry = gateRegistry;
 	}
 	
@@ -29,7 +30,8 @@ public class CreateCommand implements Command {
 			player.sendMessage(MessageConstants.format(MessageConstants.CREATE_ALREADY_EXISTS, destinationServer));
 			return;
 		}
-		//TOOD add create context
+		this.createListener.submitSession(new CreateSession(player, destinationServer));
+		player.sendMessage(MessageConstants.format(MessageConstants.CREATE_STEP_1));
 	}
 
 	public String getId() {

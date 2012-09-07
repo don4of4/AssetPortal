@@ -18,6 +18,10 @@ public class MessageConstants {
 	public static final String COMMAND_NO = PREFIX + "&cThe specified command does not exist &f(&4%s&f)";
 	
 	public static final String CREATE_ALREADY_EXISTS =  PREFIX + "&cThere is already a gate leading to the specified server &f(&4%s&f)";
+	public static final String CREATE_STEP_1 =  PREFIX + "Right click on one of the &6corner blocks &fof the gate";
+	public static final String CREATE_STEP_2 =  PREFIX + "Right click on the &6opposite corner &fblock of the gate";
+	public static final String CREATE_STEP_3 =  PREFIX + "Right click on the &6outward block &fof the gate (&6be wary of the direction you face&f)";
+	public static final String CREATE = PREFIX + "You have successfully created a portal going to &6%s";
 	
 	public static final String DELETE_NO_EXIST = PREFIX + "&cThere is no gate leading to the specified server &f(&4%s&f)";
 	public static final String DELETE_SUCCESS = PREFIX + "The gate leading to &6%s &fhas been deleted";

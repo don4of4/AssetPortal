@@ -14,6 +14,7 @@ import asset.connect.api.result.impl.DirectResult;
 import asset.portal.IConnector;
 import asset.portal.IRedirector;
 import asset.portal.command.PortalCommandExecutor;
+import asset.portal.command.create.CreateListener;
 import asset.portal.gate.Gate;
 import asset.portal.gate.GateListener;
 import asset.portal.gate.GateRegistry;
@@ -30,6 +31,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 	private GateListener gateListener;
 	private UserRegistry userRegistry;
 	private UserListener userListener;
+	private CreateListener createListener;
 	private Storage storage;
 
 	@Override
@@ -46,15 +48,17 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			this.gateListener = new GateListener(this.gateRegistry, this);
 			this.userRegistry = new UserRegistry();
 			this.userListener = new UserListener(this.gateRegistry, this.userRegistry, this, this);
+			this.createListener = new CreateListener(this.gateRegistry);
 			this.storage = new FileStorage(new File(this.getDataFolder(), "store_user.dat"), new File(this.getDataFolder(), "store_gate.dat"));
 			this.storage.setUserRegistry(this.userRegistry);
 			this.storage.loadUsers();
 			this.storage.setGateRegistry(this.gateRegistry);
 			this.storage.loadGates();
-			this.getServer().getPluginCommand("portal").setExecutor(new PortalCommandExecutor(this.gateRegistry));
+			this.getServer().getPluginCommand("portal").setExecutor(new PortalCommandExecutor(this.gateRegistry, this.createListener));
 			this.getServer().getScheduler().scheduleSyncRepeatingTask(this, this.storage, 100L, 100L);
 			this.getServer().getPluginManager().registerEvents(this.gateListener, this);
 			this.getServer().getPluginManager().registerEvents(this.userListener, this);
+			this.getServer().getPluginManager().registerEvents(this.createListener, this);
 			this.getConnect().registerDirectEventListener(this.userListener);
 		} catch(Exception exception) {
 			exception.printStackTrace();
@@ -80,6 +84,7 @@ public class PortalPlugin extends JavaPlugin implements IRedirector, IConnector 
 			this.gateListener = null;
 			this.userRegistry = null;
 			this.userListener = null;
+			this.createListener = null;
 			this.storage = null;
 		}
 	}

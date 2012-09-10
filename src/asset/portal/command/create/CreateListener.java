@@ -17,7 +17,7 @@ import com.google.common.collect.MapMaker;
 
 public class CreateListener implements Listener {
 
-	private Map<Player, CreateSession> createSessions = new MapMaker().softValues().makeMap();
+	private Map<Player, CreateSession> createSessions = new MapMaker().weakKeys().makeMap();
 	private GateRegistry gateRegistry;
 	
 	public CreateListener(GateRegistry gateRegistry) {

@@ -19,7 +19,7 @@ public class GateListener implements Listener {
 	private GateRegistry gateRegistry;
 	private IRedirector redirector;
 	
-	private Map<Player, Long> playersToLogins = new MapMaker().softValues().makeMap();
+	private Map<Player, Long> playersToLogins = new MapMaker().weakKeys().makeMap();
 	
 	public GateListener(GateRegistry gateRegistry, IRedirector redirector) {
 		this.gateRegistry = gateRegistry;
